@@ -36,9 +36,6 @@ namespace CQRS.Controllers
             return await _mediator.Send(request);
         }
 
-        // POST: Books/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost("[action]")]
         public async Task<IActionResult> Create(AddBookCommandRequest request)
         {
@@ -46,18 +43,12 @@ namespace CQRS.Controllers
             return Ok();
         }
 
-        // POST: Books/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost("[action]")]
         public async Task<UpdateBookDetailsCommandResponse> Edit(UpdateBookDetailsCommandRequest request)
         {
             return await _mediator.Send(request);
         }
 
-        // POST: Books/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpDelete("[action]")]
         public async Task<IActionResult> Delete([FromQuery]DeleteBookCommandRequest request)
         {
