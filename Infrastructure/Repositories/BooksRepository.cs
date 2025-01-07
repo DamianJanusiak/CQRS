@@ -20,14 +20,16 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task<List<Book>> GetBooks(string? author, int? pageSize)
+        public async Task DeleteBook(Guid id)
+        {
+            var book = await GetBookyId(id);
+            _context.Book.Remove(book);
+            await _context.SaveChangesAsync();
+        }
+
+        public Task<List<Book>> GetBooks(int? pageSize)
         {
             var query = _context.Book;
-
-            if (author != null)
-            {
-                query.Where(x => x.Author == author);
-            }
 
             if (pageSize != null)
             {

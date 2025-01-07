@@ -31,7 +31,7 @@ namespace CQRS.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<GetBookByIdQueryResponse> GetById(GetBookByIdQueryRequest request)
+        public async Task<GetBookByIdQueryResponse> GetById([FromQuery]GetBookByIdQueryRequest request)
         {
             return await _mediator.Send(request);
         }
@@ -53,6 +53,16 @@ namespace CQRS.Controllers
         public async Task<UpdateBookDetailsCommandResponse> Edit(UpdateBookDetailsCommandRequest request)
         {
             return await _mediator.Send(request);
+        }
+
+        // POST: Books/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> Delete([FromQuery]DeleteBookCommandRequest request)
+        {
+            await _mediator.Send(request);
+            return Ok();
         }
     }
 }

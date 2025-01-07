@@ -17,7 +17,7 @@ namespace Aplication.Queries.GetBooks
 
         public async Task<GetBooksQueryResponse> Handle(GetBooksQueryRequest request, CancellationToken cancellationToken)
         {
-            var books = await _booksRepository.GetBooks(request.Author,request.PageSize);
+            var books = await _booksRepository.GetBooks(request.PageSize);
 
             return new GetBooksQueryResponse
             {
