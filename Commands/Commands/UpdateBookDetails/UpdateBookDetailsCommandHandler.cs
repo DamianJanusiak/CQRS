@@ -7,7 +7,7 @@ using System.Net;
 
 namespace Commands.Commands.UpdateBookDetails
 {
-    public class UpdateBookCommandHandler : IRequestHandler<UpdateBookDetailsCommandRequest, UpdateBookDetailsCommandResponse>
+    public class UpdateBookCommandHandler : IRequestHandler<UpdateBookDetailsCommandRequest>
     {
         private readonly IBooksRepository _booksRepository;
 
@@ -20,14 +20,9 @@ namespace Commands.Commands.UpdateBookDetails
         [OpenApiOperation("UpdateBook", "Books")]
         [OpenApiRequestBody("application/json", typeof(UpdateBookDetailsCommandRequest))]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(UpdateBookDetailsCommandResponse))]
-        public async Task<UpdateBookDetailsCommandResponse> Handle([HttpTrigger(AuthorizationLevel.Anonymous, "patch")] UpdateBookDetailsCommandRequest request, CancellationToken cancellationToken)
+        public async Task Handle([HttpTrigger(AuthorizationLevel.Anonymous, "patch")] UpdateBookDetailsCommandRequest request, CancellationToken cancellationToken)
         {
             var book = await _booksRepository.UpdateBook(request.Id, request.Title, request.Author, request.Description, request.Pagenumber);
-            
-            return new UpdateBookDetailsCommandResponse
-            { 
-                Book = book
-            };
         }
     }
 }

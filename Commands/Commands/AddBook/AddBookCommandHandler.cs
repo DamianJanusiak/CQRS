@@ -7,7 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 
 namespace Commands.Commands.AddBook
 {
-    public class AddBookCommandHandler : IRequestHandler<AddBookCommandRequest, AddBookCommandResponse>
+    public class AddBookCommandHandler : IRequestHandler<AddBookCommandRequest>
     {
         private readonly IBooksRepository _booksRepository;
 
@@ -21,7 +21,7 @@ namespace Commands.Commands.AddBook
         [Function("AddBook")]
         [OpenApiOperation("AddBook", "Books")]
         [OpenApiRequestBody("application/json", typeof(AddBookCommandRequest))]
-        public async Task<AddBookCommandResponse> Handle([HttpTrigger(AuthorizationLevel.Anonymous, "post")] AddBookCommandRequest request, CancellationToken cancellationToken)
+        public async Task Handle([HttpTrigger(AuthorizationLevel.Anonymous, "post")] AddBookCommandRequest request, CancellationToken cancellationToken)
         {
             var book = new Book
             {
@@ -34,12 +34,6 @@ namespace Commands.Commands.AddBook
                 Title = request.Title,
             };
             await _booksRepository.AddBook(book);
-
-            return new AddBookCommandResponse
-            {
-                Book = book
-            };
-
         }
     }
 }
