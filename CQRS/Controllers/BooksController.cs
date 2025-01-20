@@ -44,9 +44,9 @@ namespace CQRS.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<UpdateBookDetailsCommandResponse> Edit(UpdateBookDetailsCommandRequest request)
+        public async Task Edit(UpdateBookDetailsCommandRequest request)
         {
-            return await _mediator.Send(request);
+             await _mediator.Send(request);
         }
 
         [HttpDelete("[action]")]
