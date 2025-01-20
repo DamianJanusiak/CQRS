@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Aplication.Queries.GetBooks
 {
-    public record AddBookCommandRequest(string Title, string Description, string Author, int PageNumber, byte[] Content) : IRequest<AddBookCommandResponse>;
+    public record AddBookCommandRequest(string Title, string Description, string Author, int PageNumber, string Content) : IRequest;
 }

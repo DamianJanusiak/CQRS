@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Aplication.Queries.GetBooks
 {
-    public class AddBookCommandHandler : IRequestHandler<AddBookCommandRequest, AddBookCommandResponse>
+    public class AddBookCommandHandler : IRequestHandler<AddBookCommandRequest>
     {
         private readonly IBooksRepository _booksRepository;
 
@@ -15,7 +15,7 @@ namespace Aplication.Queries.GetBooks
 
         public Task<List<Book>> Books { get; private set; }
 
-        public async Task<AddBookCommandResponse> Handle(AddBookCommandRequest request, CancellationToken cancellationToken)
+        public async Task Handle(AddBookCommandRequest request, CancellationToken cancellationToken)
         {
             var book = new Book
             {
@@ -28,12 +28,6 @@ namespace Aplication.Queries.GetBooks
                 Title = request.Title,
             };
             await _booksRepository.AddBook(book);
-
-            return new AddBookCommandResponse
-            {
-                Book = book
-            };
-
         }
     }
 }

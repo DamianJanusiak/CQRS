@@ -55,5 +55,12 @@ namespace CQRS.Controllers
             await _mediator.Send(request);
             return Ok();
         }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> SendNotification([FromQuery]Notifications.Notification notification)
+        {
+            await _mediator.Publish(notification);
+            return Ok();
+        }
     }
 }

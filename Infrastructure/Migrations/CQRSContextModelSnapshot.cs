@@ -35,9 +35,9 @@ namespace Infrastructure.Migrations
                     b.Property<int>("BookPages")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Content")
+                    b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
